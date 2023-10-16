@@ -1,15 +1,15 @@
 # General Info
 
-Language: ASP.Net Core API 5 with react front end
-C#, JS, HTML, CSS
-NPM: Node/React Package Manager
-Bootstrap: CSS framework
-SPA Proxy: True
-Docker: True
-Runs with docker-compose
-Database: SQL Server
-Code first approach for minimal manual table building 
-Swagger for API calls
+Language: ASP.Net Core API 5 with react front end\
+C#, JS, HTML, CSS\
+NPM: Node/React Package Manager\
+Bootstrap: CSS framework\
+SPA Proxy: True\
+Docker: True\
+Runs with docker-compose\
+Database: SQL Server\
+Code first approach for minimal manual table building\
+Swagger for API calls\
 
 
 # Install
@@ -28,12 +28,11 @@ This above command should clone all project files.
 ###### Running Full Project
 
 Docker desktop will be needed to run and compile the project with .Net API. This means if backend API calls and database fetching is required to test your portion of code, run with 
-`docker-compose up`. If running in VS Code many more dependencies will need to be installed. 
+`docker-compose up`
 
 ###### Running only Frontend
 
 If you want to run the project and test only the look and feel of the app, run using NPM. Navigate to Client App root folder and run the following command in terminal,
 
 `npm start`
-This will start a local webserver using your localhost IP. The terminal will display the port and IP of your now hosted web app. Will be something like: `https://localhost:44461/`. Stop the app using Ctrl+C. Live reload should be available. 
-
+This will start a local webserver using your localhost IP. The terminal will display the port and IP of your now hosted web app. Will be something like: `https://localhost:44461/`
