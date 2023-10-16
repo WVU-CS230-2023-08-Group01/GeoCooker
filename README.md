@@ -32,7 +32,11 @@ Docker desktop will be needed to run and compile the project with .Net API. This
 
 ###### Running only Frontend
 
-If you want to run the project and test only the look and feel of the app, run using NPM. Navigate to Client App root folder and run the following command in terminal,\
+If you want to run the project and test only the look and feel of the app, run using NPM. If React.js is not installed navigate to their site and follow installation instructions for your given OS. Once react is installed navigate to Client App root folder and run the following command in terminal, 
 
 `npm start`\
 This will start a local webserver using your localhost IP. The terminal will display the port and IP of your now hosted web app. Will be something like: `https://localhost:44461/`. Stop the app using Ctrl+C. Live reload should be available. 
+
+## Installing NPM packages
+
+Navigate to the ClientApp directory and open terminal. Use `NPM i {Package}`. Then import the package in the component. [!] I have already installed google-map-react package [!]
