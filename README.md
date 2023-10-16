@@ -1,14 +1,14 @@
 # General Info
 
 Language: ASP.Net Core API 5 with react front end\
-- C#, JS, HTML, CSS\
+C#, JS, HTML, CSS\
 NPM: Node/React Package Manager\
 Bootstrap: CSS framework\
 SPA Proxy: True\
 Docker: True\
-- Runs with docker-compose\
+Runs with docker-compose\
 Database: SQL Server\
-- Code first approach for minimal manual table building \
+Code first approach for minimal manual table building \
 Swagger for API calls
 
 
