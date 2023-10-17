@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
+import './Home.css';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
@@ -17,17 +18,17 @@ export class Home extends Component {
   render() {
     return (
         // Important! Always set the container height explicitly
-        <div style={{ height: '100vh', width: '100%' }}>
+        <div id='map'>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: "AIzaSyDfWvBqyov4n20fceBDlWg4lDN74-oInqc" }}
                 defaultCenter={defaultProps.center}
                 defaultZoom={defaultProps.zoom}
             >
-                <AnyReactComponent
-                    lat={59.955413}
-                    lng={30.337844}
+                {/* <AnyReactComponent
+                    lat={0}
+                    lng={0}
                     text="My Marker"
-                />
+                /> */}
             </GoogleMapReact>
         </div>
     );
