@@ -4,7 +4,6 @@ import GoogleMapReact from 'google-map-react';
 
 /*
 Sources:
-
 google-map-react: https://www.npmjs.com/package/google-map-react?activeTab=readme
 example: http://google-map-react.github.io/google-map-react/map/main/
 example source code: https://github.com/google-map-react/old-examples/blob/master/web/flux/components/examples/x_main/main_map_block.jsx
