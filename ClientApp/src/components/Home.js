@@ -1,6 +1,8 @@
-import React, {Prototypes, Component} from 'react/addons';
+import React, {Component } from 'react';
+import GoogleMap from './Map/GoogleMap'
+import GoogleMapReact from 'google-map-react';
+import Marker from './Map/Marker';
 import './Home.css';
-import GoogleMapReact from 'google-map-react'; 
 
 /*
 Sources:
@@ -9,7 +11,52 @@ example: http://google-map-react.github.io/google-map-react/map/main/
 example source code: https://github.com/google-map-react/old-examples/blob/master/web/flux/components/examples/x_main/main_map_block.jsx
 */
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const getInfoWindowString = (place) => `
+    <div>
+      <div style="font-size: 16px;">
+        ${place.name}
+      </div>
+      <div style="font-size: 14px;">
+        <span style="color: grey;">
+        ${place.rating}
+        </span>
+        <span style="color: orange;">${String.fromCharCode(9733).repeat(Math.floor(place.rating))}</span><span style="color: lightgrey;">${String.fromCharCode(9733).repeat(5 - Math.floor(place.rating))}</span>
+      </div>
+      <div style="font-size: 14px; color: grey;">
+        ${place.types[0]}
+      </div>
+      <div style="font-size: 14px; color: grey;">
+        ${'$'.repeat(place.price_level)}
+      </div>
+      <div style="font-size: 14px; color: green;">
+        ${place.opening_hours.open_now ? 'Open' : 'Closed'}
+      </div>
+    </div>`;
+
+const handleApiLoaded = (map, maps, places) => {
+    const markers = [];
+    const infowindows = [];
+
+    places.forEach((place) => {
+        markers.push(new maps.Marker({
+            position: {
+                lat: place.geometry.location.lat,
+                lng: place.geometry.location.lng,
+            },
+            map,
+        }));
+
+        infowindows.push(new maps.InfoWindow({
+            content: getInfoWindowString(place),
+        }));
+    });
+
+    markers.forEach((marker, i) => {
+        marker.addListener('click', () => {
+        infowindows[i].open(map, marker);
+        });
+    });
+};
 
 const defaultProps = {
     center: {
@@ -19,25 +66,85 @@ const defaultProps = {
     zoom: 1
 }
 
-export class Home extends Component {
-  static displayName = Home.name;
+const AnyReactComponent = ({ text }) => 
+    <div>
+        {text}
+    </div>;
 
-  render() {
-    return (
-        // Important! Always set the container height explicitly
-        <div id='map'>
-            <GoogleMapReact
+const myMarker = ({ text }) =>
+  <div>
+    {text}
+  </div>
+
+export class Home extends Component {
+    static displayName = Home.name;
+    constructor(props) {
+      super(props);
+  
+      this.state = {
+        places: [],
+      };
+    }
+  
+    componentDidMount() {
+      fetch('./Map/places.json')
+        .then((response) => response.json())
+        .then((data) => {
+          data.results.forEach((result) => {
+            result.show = false; // eslint-disable-line no-param-reassign
+          });
+          this.setState({ places: data.results });
+        });
+    }
+  
+    render() {
+      const { places } = this.state;
+  
+      return (
+        <>
+          {
+            <div id='map'>
+              <GoogleMapReact
                 bootstrapURLKeys={{ key: "AIzaSyDfWvBqyov4n20fceBDlWg4lDN74-oInqc" }}
                 defaultCenter={defaultProps.center}
                 defaultZoom={defaultProps.zoom}
-            >
-                {/* <AnyReactComponent
-                    lat={0}
-                    lng={0}
-                    text="My Marker"
+                yesIWantToUseGoogleMapApiInternals={true}
+                onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps, places)}
+              >
+                <AnyReactComponent
+                  lat={0}
+                  lng={-10}
+                  text="My Marker"
+                />
+
+                {places.map((place) => (
+                  <Marker
+                    key={place.id}
+                    text={place.name}
+                    lat={place.geometry.location.lat}
+                    lng={place.geometry.location.lng}
+                  />
+                ))}
+
+                {/* <myMarker
+                  key="RandomIdKeyForMyMarkerPinned"
+                  text="MyMarkerPinned"
+                  lat={0}
+                  lng={0}
                 /> */}
-            </GoogleMapReact>
-        </div>
-    );
-  }
+
+                {/* {myPlaces.map((place) => (
+                  <myMarker
+                    key={place.id}
+                    text={place.name}
+                    lat={place.geometry.location.lat}
+                    lng={place.geometry.location.lng}
+                  />
+                ))} */}
+              </GoogleMapReact>
+            </div>
+          }
+        </>
+      );
+    }
 }
