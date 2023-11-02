@@ -62,7 +62,7 @@ const handleApiLoaded = (map, maps, places) => {
 
 const defaultProps = {
     center: {
-        lat: 0,
+        lat: 25,
         lng: 0
     },
     zoom: 1
