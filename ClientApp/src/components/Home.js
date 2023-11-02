@@ -1,8 +1,10 @@
-import React, {Component } from 'react';
+import React, { Component } from 'react';
 import GoogleMap from './Map/GoogleMap'
 import GoogleMapReact from 'google-map-react';
 import Marker from './Map/Marker';
 import './Home.css';
+
+import myMarker from './Map/myMarker';
 
 /*
 Sources:
@@ -67,14 +69,9 @@ const defaultProps = {
 }
 
 const AnyReactComponent = ({ text }) => 
-    <div>
+    <div class='custom2'>
         {text}
     </div>;
-
-const myMarker = ({ text }) =>
-  <div>
-    {text}
-  </div>
 
 export class Home extends Component {
     static displayName = Home.name;
@@ -111,10 +108,56 @@ export class Home extends Component {
                 yesIWantToUseGoogleMapApiInternals={true}
                 onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps, places)}
               >
+
                 <AnyReactComponent
-                  lat={0}
-                  lng={-10}
-                  text="My Marker"
+                  // Buffalo, United States
+                  lat={42.54}
+                  lng={-78.51}
+                />
+                <AnyReactComponent
+                  // Wakayama, Japan
+                  lat={34.14}
+                  lng={135.10}
+                />
+                <AnyReactComponent
+                  // Ushuaia, Argentina
+                  lat={-54.48}
+                  lng={-68.18}
+                />
+                <AnyReactComponent
+                  // Nuorgam, Finland
+                  lat={70.05}
+                  lng={27.53}
+                />
+                <AnyReactComponent
+                  // Novi Sad, Serbia
+                  lat={45.15}
+                  lng={19.51}
+                />
+                <AnyReactComponent
+                  // San Sebastián, Spain
+                  lat={43.19}
+                  lng={-2.00}
+                />
+                <AnyReactComponent
+                  // Iqaluit, Canada
+                  lat={63.45}
+                  lng={-68.31}
+                />
+                <AnyReactComponent
+                  // Craiova, Romania
+                  lat={44.20}
+                  lng={23.49}
+                />
+                <AnyReactComponent
+                  // Port-au-Prince, Haiti
+                  lat={18.32}
+                  lng={-72.20}
+                />
+                <AnyReactComponent
+                  // Puntarenas, Costa Rica
+                  lat={9.58}
+                  lng={-84.50}
                 />
 
                 {places.map((place) => (
@@ -126,14 +169,7 @@ export class Home extends Component {
                   />
                 ))}
 
-                {/* <myMarker
-                  key="RandomIdKeyForMyMarkerPinned"
-                  text="MyMarkerPinned"
-                  lat={0}
-                  lng={0}
-                /> */}
-
-                {/* {myPlaces.map((place) => (
+                {/* {places.map((place) => (
                   <myMarker
                     key={place.id}
                     text={place.name}
@@ -141,6 +177,7 @@ export class Home extends Component {
                     lng={place.geometry.location.lng}
                   />
                 ))} */}
+
               </GoogleMapReact>
             </div>
           }
