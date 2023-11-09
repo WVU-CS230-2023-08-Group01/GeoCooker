@@ -18,8 +18,8 @@ namespace GeoCooker.Data
 
             var recipes = new Recipe[]
             {
-            new Recipe{Name="curry"},
-            new Recipe{Name="getti"},
+            new Recipe{RecipeName="curry"},
+            new Recipe{RecipeName="getti"},
             };
             foreach (Recipe r in recipes)
             {
