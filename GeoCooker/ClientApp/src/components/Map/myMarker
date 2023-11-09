@@ -1,0 +1,15 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
+const CustomMarker = ({ text, onClick }) => (
+  <div className="custom-marker" onClick={onClick}>
+    {text}
+  </div>
+);
+
+CustomMarker.propTypes = {
+  text: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
+};
+
+export default CustomMarker;

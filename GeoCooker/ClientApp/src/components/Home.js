@@ -1,26 +1,187 @@
 import React, { Component } from 'react';
+import GoogleMap from './Map/GoogleMap'
+import GoogleMapReact from 'google-map-react';
+import Marker from './Map/Marker';
+import './Home.css';
+
+import myMarker from './Map/myMarker';
+
+/*
+Sources:
+google-map-react: https://www.npmjs.com/package/google-map-react?activeTab=readme
+example: http://google-map-react.github.io/google-map-react/map/main/
+example source code: https://github.com/google-map-react/old-examples/blob/master/web/flux/components/examples/x_main/main_map_block.jsx
+*/
+
+const getInfoWindowString = (place) => `
+    <div>
+      <div style="font-size: 16px;">
+        ${place.name}
+      </div>
+      <div style="font-size: 14px;">
+        <span style="color: grey;">
+        ${place.rating}
+        </span>
+        <span style="color: orange;">${String.fromCharCode(9733).repeat(Math.floor(place.rating))}</span><span style="color: lightgrey;">${String.fromCharCode(9733).repeat(5 - Math.floor(place.rating))}</span>
+      </div>
+      <div style="font-size: 14px; color: grey;">
+        ${place.types[0]}
+      </div>
+      <div style="font-size: 14px; color: grey;">
+        ${'$'.repeat(place.price_level)}
+      </div>
+      <div style="font-size: 14px; color: green;">
+        ${place.opening_hours.open_now ? 'Open' : 'Closed'}
+      </div>
+    </div>`;
+
+const handleApiLoaded = (map, maps, places) => {
+    const markers = [];
+    const infowindows = [];
+
+    places.forEach((place) => {
+        markers.push(new maps.Marker({
+            position: {
+                lat: place.geometry.location.lat,
+                lng: place.geometry.location.lng,
+            },
+            map,
+        }));
+
+        infowindows.push(new maps.InfoWindow({
+            content: getInfoWindowString(place),
+        }));
+    });
+
+    markers.forEach((marker, i) => {
+        marker.addListener('click', () => {
+        infowindows[i].open(map, marker);
+        });
+    });
+};
+
+const defaultProps = {
+    center: {
+        lat: 25,
+        lng: 0
+    },
+    zoom: 1
+}
+
+const AnyReactComponent = ({ text }) => 
+    <div class='custom2'>
+        {text}
+    </div>;
 
 export class Home extends Component {
-  static displayName = Home.name;
+    static displayName = Home.name;
+    constructor(props) {
+      super(props);
+  
+      this.state = {
+        places: [],
+      };
+    }
+  
+    componentDidMount() {
+      fetch('./Map/places.json')
+        .then((response) => response.json())
+        .then((data) => {
+          data.results.forEach((result) => {
+            result.show = false; // eslint-disable-line no-param-reassign
+          });
+          this.setState({ places: data.results });
+        });
+    }
+  
+    render() {
+      const { places } = this.state;
+  
+      return (
+        <>
+          {
+            <div id='map'>
+              <GoogleMapReact
+                bootstrapURLKeys={{ key: "AIzaSyDfWvBqyov4n20fceBDlWg4lDN74-oInqc" }}
+                defaultCenter={defaultProps.center}
+                defaultZoom={defaultProps.zoom}
+                yesIWantToUseGoogleMapApiInternals={true}
+                onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps, places)}
+              >
 
-  render() {
-    return (
-      <div>
-        <h1>Hello, world!</h1>
-        <p>Welcome to your new single-page application, built with:</p>
-        <ul>
-          <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-          <li><a href='https://facebook.github.io/react/'>React</a> for client-side code</li>
-          <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-        </ul>
-        <p>To help you get started, we have also set up:</p>
-        <ul>
-          <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-          <li><strong>Development server integration</strong>. In development mode, the development server from <code>create-react-app</code> runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-          <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration produces minified, efficiently bundled JavaScript files.</li>
-        </ul>
-        <p>The <code>ClientApp</code> subdirectory is a standard React application based on the <code>create-react-app</code> template. If you open a command prompt in that directory, you can run <code>npm</code> commands such as <code>npm test</code> or <code>npm install</code>.</p>
-      </div>
-    );
-  }
+                <AnyReactComponent
+                  // Buffalo, United States
+                  lat={42.54}
+                  lng={-78.51}
+                />
+                <AnyReactComponent
+                  // Wakayama, Japan
+                  lat={34.14}
+                  lng={135.10}
+                />
+                <AnyReactComponent
+                  // Ushuaia, Argentina
+                  lat={-54.48}
+                  lng={-68.18}
+                />
+                <AnyReactComponent
+                  // Nuorgam, Finland
+                  lat={70.05}
+                  lng={27.53}
+                />
+                <AnyReactComponent
+                  // Novi Sad, Serbia
+                  lat={45.15}
+                  lng={19.51}
+                />
+                <AnyReactComponent
+                  // San Sebastián, Spain
+                  lat={43.19}
+                  lng={-2.00}
+                />
+                <AnyReactComponent
+                  // Iqaluit, Canada
+                  lat={63.45}
+                  lng={-68.31}
+                />
+                <AnyReactComponent
+                  // Craiova, Romania
+                  lat={44.20}
+                  lng={23.49}
+                />
+                <AnyReactComponent
+                  // Port-au-Prince, Haiti
+                  lat={18.32}
+                  lng={-72.20}
+                />
+                <AnyReactComponent
+                  // Puntarenas, Costa Rica
+                  lat={9.58}
+                  lng={-84.50}
+                />
+
+                {places.map((place) => (
+                  <Marker
+                    key={place.id}
+                    text={place.name}
+                    lat={place.geometry.location.lat}
+                    lng={place.geometry.location.lng}
+                  />
+                ))}
+
+                {/* {places.map((place) => (
+                  <myMarker
+                    key={place.id}
+                    text={place.name}
+                    lat={place.geometry.location.lat}
+                    lng={place.geometry.location.lng}
+                  />
+                ))} */}
+
+              </GoogleMapReact>
+            </div>
+          }
+        </>
+      );
+    }
 }

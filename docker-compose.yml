@@ -1,0 +1,43 @@
+version: '3.4'
+
+services:
+  geocooker:
+    image: ${DOCKER_REGISTRY-}geocooker
+    ports:
+      - 80:80
+      - 443:443
+    build:
+      context: .
+      dockerfile: GeoCooker/Dockerfile
+      args:
+         PASSWORD_ENV_SEEDED: 8og\ux9Lu2u:iyC\h9}+
+    environment:
+        ASPNETCORE_Kestrel__Certificates__Default__Password: 8og\ux9Lu2u:iyC\h9}+
+        ASPNETCORE_Kestrel__Certificates__Default__Path: /https/GeoCooker.pfx
+        ASPNETCORE_ENVIRONMENT: Development
+        ASPNETCORE_URLS: https://+:443;http://+:80
+        ASPNETCORE_HTTPS_PORT: 8001
+
+  db:
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: 123PasswordStr0ng!
+    # mssql server image isn't available for arm64 architecture, so we use azure-sql instead
+    image: mcr.microsoft.com/azure-sql-edge:1.0.4
+    # If you really want to use MS SQL Server, uncomment the following line
+    #image: mcr.microsoft.com/mssql/server
+    restart: always
+    healthcheck:
+        test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 123PasswordStr0ng! -Q 'SELECT 1' || exit 1"]
+        interval: 10s
+        retries: 10
+        start_period: 10s
+        timeout: 3s  
+       
+      #db:
+    #image: "mcr.microsoft.com/mssql/server"
+    #environment:
+     #       MSSQL_SA_PASSWORD: x0nL9C123^gDhjVf!!HSbbcuud**12
+      #      ACCEPT_EULA: "Y"
+   # ports:
+    #    - "1444:1433" 
