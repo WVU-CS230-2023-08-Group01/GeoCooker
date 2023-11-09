@@ -90,7 +90,7 @@ namespace GeoCooker.Controllers
               return Problem("Entity set 'ApplicationDbContext.Recipes'  is null.");
           }
             Recipe recipe = new Recipe();
-            recipe.Name = name;
+            recipe.RecipeName = name;
             _context.Recipes.Add(recipe);
             await _context.SaveChangesAsync();
 
