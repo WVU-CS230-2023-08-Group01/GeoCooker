@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
 import { NavMenu } from './NavMenu';
+import { Footer } from './Footer';
 import './Layout.css';
 
 export class Layout extends Component {
@@ -13,6 +14,7 @@ export class Layout extends Component {
         <Container tag="main" id='container'>
           {this.props.children}
         </Container>
+        <Footer id='footer' />
       </div>
     );
   }

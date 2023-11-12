@@ -23,4 +23,10 @@ html, body {
     max-width: 100%; /* Ensure it doesn't exceed the viewport width */
     /* Additional styles for the container */
   }
+
+  #footer {
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+  }
   
