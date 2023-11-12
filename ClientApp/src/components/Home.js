@@ -3,6 +3,7 @@ import GoogleMap from './Map/GoogleMap'
 import GoogleMapReact from 'google-map-react';
 import Marker from './Map/Marker';
 import './Home.css';
+import { Link } from 'react-router-dom';
 
 import myMarker from './Map/myMarker';
 
@@ -68,10 +69,12 @@ const defaultProps = {
     zoom: 1
 }
 
-const AnyReactComponent = ({ text }) => 
+const AnyReactComponent = ({ info, id }) => 
+  <Link to={`/recipes/${id}`}>
     <div class='custom2'>
-        {text}
+        {info}
     </div>;
+  </Link>
 
 export class Home extends Component {
     static displayName = Home.name;
@@ -113,16 +116,19 @@ export class Home extends Component {
                   // Buffalo, United States
                   lat={42.54}
                   lng={-78.51}
+                  id='buffalo-us'
                 />
                 <AnyReactComponent
                   // Wakayama, Japan
                   lat={34.14}
                   lng={135.10}
+                  id='wakayama-japan'
                 />
                 <AnyReactComponent
                   // Ushuaia, Argentina
                   lat={-54.48}
                   lng={-68.18}
+                  id='ushuaia-arg'
                 />
                 <AnyReactComponent
                   // Nuorgam, Finland
