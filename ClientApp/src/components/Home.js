@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import GoogleMap from './Map/GoogleMap'
 import GoogleMapReact from 'google-map-react';
 import { Link } from 'react-router-dom';
-
 import myPlaces from './Map/myPlaces';
 import './Home.css';
 
