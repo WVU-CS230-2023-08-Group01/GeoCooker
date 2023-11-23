@@ -19,7 +19,9 @@ Visual Studio is a very heavyweight IDE that comes with a slew of languages and 
 
 For both options create a new project in the desired location on drive. Open the terminal in the location you want the project to be stored. \
 
-`git clone https://github.com/WVU-CS230-2023-08-Group01/GeoCooker.git`
+```
+git clone https://github.com/WVU-CS230-2023-08-Group01/GeoCooker.git
+```
 
 This above command should clone all project files. \
 
@@ -27,16 +29,30 @@ This above command should clone all project files. \
 
 ###### Running Full Project
 
-Docker desktop will be needed to run and compile the project with .Net API. This means if backend API calls and database fetching is required to test your portion of code, run with 
-`docker-compose up`. If running in VS Code many more dependencies will need to be installed. 
+Docker desktop will be needed to run and compile the project with .Net API. This means if backend API calls and database fetching is required to test your portion of code, run with:
+
+```
+docker-compose up
+```
+
+If running in VS Code many more dependencies will need to be installed. 
 
 ###### Running only Frontend
 
 If you want to run the project and test only the look and feel of the app, run using NPM. If React.js is not installed navigate to their site and follow installation instructions for your given OS. Once react is installed navigate to Client App root folder and run the following command in terminal, 
 
-`npm start`\
+```
+npm start
+```
+
 This will start a local webserver using your localhost IP. The terminal will display the port and IP of your now hosted web app. Will be something like: `https://localhost:44461/`. Stop the app using Ctrl+C. Live reload should be available. 
 
 ## Installing NPM packages
 
-Navigate to the ClientApp directory and open terminal. Use `NPM i {Package}`. Then import the package in the component. [!] I have already installed google-map-react package [!]
+Navigate to the ClientApp directory and open terminal. Use:
+
+```
+NPM i {Package}
+```
+
+Then import the package in the component. [!] I have already installed google-map-react package [!]
