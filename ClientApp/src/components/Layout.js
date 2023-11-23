@@ -14,7 +14,7 @@ export class Layout extends Component {
         <Container tag="main" id='container'>
           {this.props.children}
         </Container>
-        <Footer id='footer' />
+        {/* <Footer id='footer' /> */}
       </div>
     );
   }
