@@ -18,8 +18,7 @@ namespace GeoCooker.Data
 
             var recipes = new Recipe[]
             {
-            new Recipe{RecipeName="curry"},
-            new Recipe{RecipeName="getti"},
+            new Recipe{Lat=39.993220, Lon=-81.741108, Location="newconcord_oh", RecipeName="Beefy Birria Tacos", Description="Beefy tacos!", Rating=5},
             };
             foreach (Recipe r in recipes)
             {

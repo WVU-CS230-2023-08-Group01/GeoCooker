@@ -3,9 +3,47 @@ using GeoCooker.Data;
 using GeoCooker.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.Authority = "https://dev-hnosbuofym3q3o0u.us.auth0.com/";
+    options.Audience = "https://geocooker/auth/0/api";
+});
+    
+//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//.AddJwtBearer(options =>
+//{
+//    options.Authority = $"https://{builder.Configuration["Auth0:Domain"]}/";
+//    options.Audience = builder.Configuration["Auth0:Audience"];
+//    options.TokenValidationParameters = new TokenValidationParameters
+//    {
+//        NameClaimType = ClaimTypes.NameIdentifier
+//    };
+//});
+
+//    builder.Services
+//      .AddAuthorization(options =>
+//      {
+//          options.AddPolicy(
+//            "read:messages",
+//            policy => policy.Requirements.Add(
+//              new HasScopeRequirement("write:recipe", builder.Configuration["Auth0:Domain"])
+//            )
+//          );
+//      });
+
+//    builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
 
 // Add services to the container.
 
@@ -56,7 +94,8 @@ app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",

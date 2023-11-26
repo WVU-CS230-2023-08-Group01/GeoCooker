@@ -1,0 +1,122 @@
+﻿[
+  {
+    "id": "buffalo_us",
+    "title": "Crispy, oven roasted Buffalo Chicken Pieces",
+    "author": "Austin Driggs",
+    "source": "https://www.ethanchlebowski.com/cooking-techniques-recipes/crispy-oven-roasted-buffalo-chicken-pieces",
+    "description": "You can make deliciously crisp buffalo wings in the oven, but you know what I think might be better? Crispy Whole chicken pieces. It's the same crispy skin, but more meat and a little more juicy as the meat doesn't dry out quite as much in the oven. Smother them in some buffalo sauce and you have something special.",
+    "ingredients": {
+      "ingredient0": "1 whole chicken, preferably air chilled",
+      "ingredient1": "1% salt",
+      "ingredient2": "1% baking powder",
+      "ingredient3": "1% corn starch",
+      "ingredient4": "50 g butter (1 part)",
+      "ingredient5": "50 g hot sauce (1 part) - (Frank's red hot or your favorite Louisiana style hot sauce)",
+      "ingredient6": "Garlic powder",
+      "ingredient7": "20 cranks of black pepper"
+    },
+    "steps": {
+      "step0": "Break the whole chicken down into 10 pieces (save the backbone to make stock!). Using a paper towel, dry the exterior of the chicken to remove excess moisture.",
+      "step1": "Place a large bowl over a scale, add the chicken pieces, and note the weight down. Add 1% by weight of salt, baking powder, and corn starch. Toss the chicken pieces in the mixture until evenly coated.",
+      "step2": "Place a piece of aluminum foil over a baking sheet and add a wire rack over top. Place the chicken pieces over top and add to an open spot on the bottom shelf of the fridge. For optimal results, let air dry for at least 4 hours or up to 24. Otherwise, proceed to the next step.",
+      "step3": "When ready to bake, preheat the oven to 450 degrees F. Take the chicken out of the fridge. If there is any noticeable water drops on the exterior of the chicken, lightly dab it off with a paper towel.",
+      "step4": "Add the chicken to the oven and bake for 20 to 25 minutes, during which the skin should begin to render, get crisp and start browning. Rotate the chicken wings and drumsticks to get even browning. Continue baking the chicken pieces for another 15 to 25 minutes until evenly brown and crisp all over the skin. Meanwhile, you can prepare the buffalo sauce and dipping sauces, such as the ranch dressing below.",
+      "step5": "At the stove, melt the butter in a saucepan over medium-low heat. Once melted add the hot sauce of your choice, the garlic powder, and black pepper. Stir until the sauce is cohesive and then take off the heat.",
+      "step6": "Once the chicken is done, add it to a large bowl. Spoon the buffalo sauce over top and toss so it is evenly coated on the exterior. Serve immediately with the dipping sauce of your choice."
+    },
+    "rating": "8.3"
+  },
+  {
+    "id": "sushi_japan",
+    "title": "Assorted Sushi",
+    "author": "Yuki Tanaka",
+    "source": "https://www.example.com/sushi-recipes",
+    "description": "A delightful assortment of traditional Japanese sushi.",
+    "ingredients": {
+      "ingredient0": "Sushi rice",
+      "ingredient1": "Nori (seaweed)",
+      "ingredient2": "Assorted fish (salmon, tuna, etc.)",
+      "ingredient3": "Vegetables (cucumber, avocado, etc.)",
+      "ingredient4": "Soy sauce",
+      "ingredient5": "Wasabi",
+      "ingredient6": "Pickled ginger"
+    },
+    "steps": {
+      "step0": "Prepare sushi rice and let it cool.",
+      "step1": "Place a sheet of nori on a bamboo rolling mat.",
+      "step2": "Spread rice over the nori and add fish and vegetables.",
+      "step3": "Roll the sushi tightly using the bamboo mat.",
+      "step4": "Slice the roll into bite-sized pieces.",
+      "step5": "Serve with soy sauce, wasabi, and pickled ginger."
+    },
+    "rating": "9.0"
+  },
+  {
+    "id": "arg_empanadas",
+    "title": "Traditional Argentine Empanadas",
+    "author": "Carlos Rodriguez",
+    "source": "https://www.example.com/empanadas-recipes",
+    "description": "Classic Argentinean empanadas with a savory filling.",
+    "ingredients": {
+      "ingredient0": "Ground beef",
+      "ingredient1": "Onions",
+      "ingredient2": "Bell peppers",
+      "ingredient3": "Cumin",
+      "ingredient4": "Paprika",
+      "ingredient5": "Pie crust",
+      "ingredient6": "Egg (for egg wash)"
+    },
+    "steps": {
+      "step0": "Cook ground beef with onions and bell peppers.",
+      "step1": "Season with cumin and paprika.",
+      "step2": "Roll out pie crust and cut circles.",
+      "step3": "Place a spoonful of filling on each circle.",
+      "step4": "Fold the dough over and seal the edges.",
+      "step5": "Brush with egg wash and bake until golden brown."
+    },
+    "rating": "8.5"
+  },
+  {
+    "id": "nuorgam_fin",
+    "lat": 70.05,
+    "lng": 27.53,
+    "title": "Salmon Soup"
+  },
+  {
+    "id": "novi_sad_srb",
+    "lat": 45.15,
+    "lng": 19.51,
+    "title": "Cevapi"
+  },
+  {
+    "id": "san_sebastian_esp",
+    "lat": 43.19,
+    "lng": -2.00,
+    "title": "Pintxos"
+  },
+  {
+    "id": "iqaluit_can",
+    "lat": 63.45,
+    "lng": -68.31,
+    "title": "Caribou Stew"
+  },
+  {
+    "id": "craiova_rom",
+    "lat": 44.20,
+    "lng": 23.49,
+    "title": "Mamaliga"
+  },
+  {
+    "id": "port_au_prince_hai",
+    "lat": 18.32,
+    "lng": -72.20,
+    "title": "Griot"
+  },
+  {
+    "id": "puntarenas_cos",
+    "lat": 9.58,
+    "lng": -84.50,
+    "title": "Gallo Pinto"
+  }
+]
+  

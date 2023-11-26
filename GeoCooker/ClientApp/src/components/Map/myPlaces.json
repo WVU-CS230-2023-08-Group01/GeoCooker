@@ -1,0 +1,129 @@
+﻿[
+  {
+    "id": "newconcord_oh",
+    "lat": 39.993220,
+    "lng": -81.741108,
+    "title": "Beefy Birria Tacos"
+  },
+  {
+    "id": "buffalo_us",
+    "lat": 42.54,
+    "lng": -78.51,
+    "title": "Buffalo Wings ToTest CharacterLimit ForGeoCookerrr"
+  },
+  {
+    "id": "wakayama_japan",
+    "lat": 34.14,
+    "lng": 135.10,
+    "title": "Sushi ToAlsoTextTheCharacter Limit"
+  },
+  {
+    "id": "ushuaia_arg",
+    "lat": -54.48,
+    "lng": -68.18,
+    "title": "Ciabatta Chimichurri Steak Sandwich"
+  },
+  {
+    "id": "nuorgam_fin",
+    "lat": 70.05,
+    "lng": 27.53,
+    "title": "Salmon Soup"
+  },
+  {
+    "id": "novi_sad_srb",
+    "lat": 45.15,
+    "lng": 19.51,
+    "title": "Cevapi"
+  },
+  {
+    "id": "san_sebastian_esp",
+    "lat": 43.19,
+    "lng": -2.00,
+    "title": "Pintxos"
+  },
+  {
+    "id": "iqaluit_can",
+    "lat": 63.45,
+    "lng": -68.31,
+    "title": "Caribou Stew"
+  },
+  {
+    "id": "craiova_rom",
+    "lat": 44.20,
+    "lng": 23.49,
+    "title": "Mamaliga"
+  },
+  {
+    "id": "port_au_prince_hai",
+    "lat": 18.32,
+    "lng": -72.20,
+    "title": "Griot"
+  },
+  {
+    "id": "puntarenas_cos",
+    "lat": 9.58,
+    "lng": -84.50,
+    "title": "Gallo Pinto"
+  },
+  {
+    "id": "morgantown_wv",
+    "lat": 39.6295,
+    "lng": -79.9559,
+    "title": "Pepperoni Rolls"
+  },
+  {
+    "id": "charleston_wv",
+    "lat": 38.3498,
+    "lng": -81.6326,
+    "title": "Hot Dogs with Chili and Slaw"
+  },
+  {
+    "id": "huntington_wv",
+    "lat": 38.4192,
+    "lng": -82.4452,
+    "title": "West Virginia Style Pizza"
+  },
+  {
+    "id": "wheeling_wv",
+    "lat": 40.0634,
+    "lng": -80.7209,
+    "title": "Pierogies"
+  },
+  {
+    "id": "parkersburg_wv",
+    "lat": 39.2667,
+    "lng": -81.5615,
+    "title": "Fried Fish Sandwich"
+  },
+  {
+    "id": "martinsburg_wv",
+    "lat": 39.4562,
+    "lng": -77.9639,
+    "title": "Apple Butter"
+  },
+  {
+    "id": "clarksburg_wv",
+    "lat": 39.2796,
+    "lng": -80.3445,
+    "title": "Italian Bread"
+  },
+  {
+    "id": "fairmont_wv",
+    "lat": 39.4851,
+    "lng": -80.1423,
+    "title": "Country Ham Biscuits"
+  },
+  {
+    "id": "beckley_wv",
+    "lat": 37.7782,
+    "lng": -81.1882,
+    "title": "Homemade Apple Butter"
+  },
+  {
+    "id": "logan_wv",
+    "lat": 37.8394,
+    "lng": -82.0132,
+    "title": "Bean Soup"
+  }
+]
+  

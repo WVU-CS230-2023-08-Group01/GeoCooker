@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GeoCooker.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GeoCooker.Controllers
 {
@@ -52,6 +53,7 @@ namespace GeoCooker.Controllers
         // PUT: api/Recipe/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> PutRecipe(int id, Recipe recipe)
         {
             if (id != recipe.ID)
@@ -83,6 +85,7 @@ namespace GeoCooker.Controllers
         // POST: api/Recipe
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Recipe>> PostRecipe(string name)
         {
           if (_context.Recipes == null)
@@ -99,6 +102,7 @@ namespace GeoCooker.Controllers
 
         // DELETE: api/Recipe/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteRecipe(int id)
         {
             if (_context.Recipes == null)

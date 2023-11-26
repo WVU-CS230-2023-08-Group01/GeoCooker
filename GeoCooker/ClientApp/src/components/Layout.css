@@ -4,23 +4,28 @@ html, body {
     padding: 0;
     height: 100%;
     overflow: hidden; /* Prevent scrolling */
-  }
-  
-  /* Style the content container and its parent div to fill the screen */
-  #root {
-    height: 100%;
-  }
+}
 
-  #nav-menu {
+/* Style the content container and its parent div to fill the screen */
+#root {
+    height: 100%;
+}
+
+#nav-menu {
     padding: 0;
     margin: 0;
-  }
-  
-  /* Make the Container full width with a maximum width */
-  #container {
+}
+
+/* Make the Container full width with a maximum width */
+#container {
     padding: 0;
     width: 100%;
     max-width: 100%; /* Ensure it doesn't exceed the viewport width */
     /* Additional styles for the container */
-  }
-  
+}
+
+#footer {
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+}
