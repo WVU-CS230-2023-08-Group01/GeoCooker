@@ -16,11 +16,27 @@ namespace GeoCooker.Data
                 return;   // DB has been seeded
             }
 
-            var recipes = new Recipe[]
+            Random random = new Random();
+
+            List<Recipe> entries = new List<Recipe>();
+
+            for (int i = 0; i < 1000; i++)
             {
-            new Recipe{Lat=39.993220, Lon=-81.741108, Location="newconcord_oh", RecipeName="Beefy Birria Tacos", Description="Beefy tacos!", Rating=5},
-            };
-            foreach (Recipe r in recipes)
+                Recipe entry = new Recipe
+                {
+                    Lat = random.NextDouble() * 180 - 90,
+                    Lon = random.NextDouble() * 360 - 180,
+                    RecipeName = "Recipe " + (i + 1),
+                    Description = "Description for Recipe " + (i + 1),
+                    Location = "Location " + (i + 1),
+                    Rating = Math.Round(random.NextDouble() * 5, 1) // Generates a random rating between 0 and 5
+
+                };
+
+                entries.Add(entry);
+            }
+           
+            foreach (Recipe r in entries)
             {
                 context.Recipes.Add(r);
             }

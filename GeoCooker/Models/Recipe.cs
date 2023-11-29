@@ -9,7 +9,7 @@ namespace GeoCooker.Models
 		public string Location { get; set; }
 		public string RecipeName { get; set; }
 		public string Description { get; set; }
-		public int Rating { get; set; }
+		public double Rating { get; set; }
         public ICollection<Instruction> Instructions { get; set; }
         public ICollection<Ingredient> Ingredients { get; set; }
 

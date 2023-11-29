@@ -86,6 +86,8 @@ export class Home extends Component {
         };
     }
 
+    
+
     componentDidMount() {
         //fetch('./Map/myPlaces.json')
         //    .then((response) => response.json())
@@ -95,6 +97,7 @@ export class Home extends Component {
         //        });
         //        this.setState({ places: data.results });
         //    });
+        
         fetch('/api/Recipe')
             .then((response) => response.json())
             .then((data) => {
@@ -107,7 +110,14 @@ export class Home extends Component {
 
     render() {
         const { places } = this.state;
+        var recipes = [];
+        async function logRecipes() {
+            const response = await fetch("/api/Recipe");
+            recipes = await response.json();
+            console.log(recipes);
+          }
 
+          logRecipes();
         return (
             <>
                 {
@@ -120,13 +130,13 @@ export class Home extends Component {
                             onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps, places)}
                         >
 
-                            {myPlaces.map((dataItem) => (
+                            {recipes.map((recipe) => (
                                 <MyMapMarker
-                                    key={dataItem.ID}
-                                    id={dataItem.ID}
-                                    lat={dataItem.Lat}
-                                    lng={dataItem.Lon}
-                                    title={dataItem.RecipeName}
+                                    key={recipe.id}
+                                    id={recipe.recipeName}
+                                    lat={recipe.lat}
+                                    lng={recipe.lon}
+                                    title={recipe.location}
                                 />
                             ))}
 
