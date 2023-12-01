@@ -2,7 +2,8 @@ import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
 import { AddRecipe } from "./components/AddRecipe"
-
+import { AuthenticationGuard } from "./components/Authentication/authentication-guard";
+import  Profile  from "./components/Authentication/Profile"
 const AppRoutes = [
   {
     index: true,
@@ -21,9 +22,13 @@ const AppRoutes = [
         element: <FetchData />
     },
     {
-        path: '/AddRecipe',
-        element: <AddRecipe />
-    }
+        path: '/Profile',
+        element: < Profile/>
+    },
+    //{
+    //    path: '/AddRecipe',
+    //    element: <AddRecipe />
+    //}
 ];
 
 export default AppRoutes;

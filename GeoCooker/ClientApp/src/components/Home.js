@@ -4,6 +4,7 @@ import GoogleMapReact from 'google-map-react';
 import { Link } from 'react-router-dom';
 import myPlaces from './Map/myPlaces';
 import './Home.css';
+import { getRecipeResource } from "../Services/message.service";
 
 
 /*
@@ -97,7 +98,8 @@ export class Home extends Component {
         //        });
         //        this.setState({ places: data.results });
         //    });
-        
+
+
         fetch('/api/Recipe')
             .then((response) => response.json())
             .then((data) => {
@@ -110,14 +112,13 @@ export class Home extends Component {
 
     render() {
         const { places } = this.state;
-        var recipes = [];
-        async function logRecipes() {
-            const response = await fetch("/api/Recipe");
-            recipes = await response.json();
-            console.log(recipes);
-          }
+        //var recipes = [];
+        //async function logRecipes() {
+        //    const { data, error } = await getRecipeResource();
+        //  }
+        
 
-          logRecipes();
+        //  logRecipes();
         return (
             <>
                 {
@@ -130,15 +131,15 @@ export class Home extends Component {
                             onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps, places)}
                         >
 
-                            {recipes.map((recipe) => (
-                                <MyMapMarker
-                                    key={recipe.id}
-                                    id={recipe.recipeName}
-                                    lat={recipe.lat}
-                                    lng={recipe.lon}
-                                    title={recipe.location}
-                                />
-                            ))}
+                            {/*{recipes.map((recipe) => (*/}
+                            {/*    <MyMapMarker*/}
+                            {/*        key={recipe.id}*/}
+                            {/*        id={recipe.recipeName}*/}
+                            {/*        lat={recipe.lat}*/}
+                            {/*        lng={recipe.lon}*/}
+                            {/*        title={recipe.location}*/}
+                            {/*    />*/}
+                            {/*))}*/}
 
                             <MyMapMarker
                                 key={"random"}

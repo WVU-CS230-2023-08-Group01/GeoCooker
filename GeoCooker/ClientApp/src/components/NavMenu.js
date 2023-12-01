@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
-
-import { useAuth0 } from "@auth0/auth0-react";
-import LoginButton from './Authentication/LoginButton';
-import LogoutButton from './Authentication/LogoutButton';
-import Profile from './Authentication/Profile';
+//import LoginButton from './Authentication/LoginButton';
+//import LogoutButton from './Authentication/LogoutButton';
+//import Profile from './Authentication/Profile';
 
 import './NavMenu.css';
+import NavSection from './Authentication/NavSection';
 
 export class NavMenu extends Component {
     static displayName = NavMenu.name;
@@ -63,9 +62,7 @@ export class NavMenu extends Component {
                                     </DropdownMenu>
                                 </Dropdown>
                             </NavItem>
-                            <LoginButton></LoginButton>
-                            <LogoutButton></LogoutButton>
-                            <Profile></Profile>
+                            <NavSection></NavSection>
                         </ul>
                     </Collapse>
                 </Navbar>

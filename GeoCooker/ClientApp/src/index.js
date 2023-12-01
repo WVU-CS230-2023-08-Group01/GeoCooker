@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { BrowserRouter} from "react-router-dom";
 
+import { Auth0ProviderWithNavigate } from "./auth0-provider-with-navigate";
 
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
@@ -16,19 +17,21 @@ const root = createRoot(rootElement);
 
 root.render(
     <BrowserRouter basename={baseUrl}>
-        <Auth0Provider
-            domain="dev-hnosbuofym3q3o0u.us.auth0.com"
-            clientId="1ztfRZxvtolyBbnbLyNyIZzO1IUM14h9"
-            authorizationParams={{
-                redirect_uri: window.location.origin,
-                audience: "https://geocooker/auth/0/api",
-                //scope: "read:current_user write:Recipe"
-            }}
-        >
+        {/*<Auth0Provider*/}
+        {/*    domain="dev-hnosbuofym3q3o0u.us.auth0.com"*/}
+        {/*    clientId="1ztfRZxvtolyBbnbLyNyIZzO1IUM14h9"*/}
+        {/*    authorizationParams={{*/}
+        {/*        redirect_uri: window.location.origin,*/}
+        {/*        audience: "https://geocooker/auth/0/api",*/}
+        {/*        //scope: "read:current_user write:Recipe"*/}
+        {/*    }}*/}
+        {/*>*/}
+        {/*<Auth0ProviderWithNavigate>*/}
 
             <App />
+        {/*</Auth0ProviderWithNavigate>*/}
 
-        </Auth0Provider>
+        {/*</Auth0Provider>*/}
     </BrowserRouter>
 
 );
