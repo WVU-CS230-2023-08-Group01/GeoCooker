@@ -4,7 +4,6 @@ import GoogleMapReact from 'google-map-react';
 import { Link } from 'react-router-dom';
 import myPlaces from './Map/myPlaces';
 import './Home.css';
-import { getRecipeResource } from "../Services/message.service";
 
 
 /*
@@ -87,20 +86,8 @@ export class Home extends Component {
         };
     }
 
-    
-
     componentDidMount() {
-        //fetch('./Map/myPlaces.json')
-        //    .then((response) => response.json())
-        //    .then((data) => {
-        //        data.results.forEach((result) => {
-        //            result.show = false; // eslint-disable-line no-param-reassign
-        //        });
-        //        this.setState({ places: data.results });
-        //    });
-
-
-        fetch('/api/Recipe')
+        fetch('./Map/myPlaces.json')
             .then((response) => response.json())
             .then((data) => {
                 data.results.forEach((result) => {
@@ -112,13 +99,7 @@ export class Home extends Component {
 
     render() {
         const { places } = this.state;
-        //var recipes = [];
-        //async function logRecipes() {
-        //    const { data, error } = await getRecipeResource();
-        //  }
-        
 
-        //  logRecipes();
         return (
             <>
                 {
@@ -131,15 +112,15 @@ export class Home extends Component {
                             onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps, places)}
                         >
 
-                            {/*{recipes.map((recipe) => (*/}
-                            {/*    <MyMapMarker*/}
-                            {/*        key={recipe.id}*/}
-                            {/*        id={recipe.recipeName}*/}
-                            {/*        lat={recipe.lat}*/}
-                            {/*        lng={recipe.lon}*/}
-                            {/*        title={recipe.location}*/}
-                            {/*    />*/}
-                            {/*))}*/}
+                            {myPlaces.map((dataItem) => (
+                                <MyMapMarker
+                                    key={dataItem.id}
+                                    id={dataItem.id}
+                                    lat={dataItem.lat}
+                                    lng={dataItem.lng}
+                                    title={dataItem.title}
+                                />
+                            ))}
 
                             <MyMapMarker
                                 key={"random"}

@@ -21,30 +21,6 @@ builder.Services.AddAuthentication(options =>
     options.Audience = "https://geocooker/auth/0/api";
 });
     
-//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//.AddJwtBearer(options =>
-//{
-//    options.Authority = $"https://{builder.Configuration["Auth0:Domain"]}/";
-//    options.Audience = builder.Configuration["Auth0:Audience"];
-//    options.TokenValidationParameters = new TokenValidationParameters
-//    {
-//        NameClaimType = ClaimTypes.NameIdentifier
-//    };
-//});
-
-//    builder.Services
-//      .AddAuthorization(options =>
-//      {
-//          options.AddPolicy(
-//            "read:messages",
-//            policy => policy.Requirements.Add(
-//              new HasScopeRequirement("write:recipe", builder.Configuration["Auth0:Domain"])
-//            )
-//          );
-//      });
-
-//    builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
-
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
@@ -61,6 +37,19 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(MyAllowSpecificOrigins,
+                          policy =>
+                          {
+                              policy.WithOrigins("https://localhost:44478",
+                                                  "http://localhost:44478")
+                                                  .AllowAnyHeader()
+                                                  .AllowAnyMethod();
+                          });
+});
 
 var app = builder.Build();
 
@@ -96,6 +85,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors(MyAllowSpecificOrigins);
 
 app.MapControllerRoute(
     name: "default",

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import AppRoutes from './AppRoutes';
+//import AppRoutes from './AppRoutes';
 import { Layout } from './components/Layout';
-import { Counter } from "./components/Counter";
-import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
-import  AddRecipe  from "./components/AddRecipe"
+import AddRecipeForm from "./components/RecipeForm"
 import { AuthenticationGuard } from "./components/Authentication/authentication-guard";
 import Profile from "./components/Authentication/Profile"
 import './custom.css';
+import Recipe from './components/Recipe';
+import PostData from './components/PostData';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -27,7 +27,7 @@ export default class App extends Component {
             />
             <Route
                 path="/Recipe"
-                element=<AddRecipe />
+                element=<Recipe />
             />
             <Route
                 path="/Profile"
@@ -35,8 +35,13 @@ export default class App extends Component {
             />
             <Route
                 path="/AddRecipe"
-                element={<AuthenticationGuard component={AddRecipe} />}
-            />
+                element={<AuthenticationGuard component={AddRecipeForm} />}
+                />
+            <Route
+                path="/conf"
+                element={<AuthenticationGuard component={PostData} />}
+                />
+
         </Routes>
       </Layout>
     );

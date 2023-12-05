@@ -17,14 +17,14 @@ const Profile = () => {
                     },
                 });
 
-                //const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
-                const userDetailsByIdUrl = `https://localhost:44478/api/Recipe`;
+                const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
+                //const userDetailsByIdUrl = `https://localhost:44478/api/Recipe`;
 
-                //const metadataResponse = await fetch(userDetailsByIdUrl, {
-                //    headers: {
-                //        Authorization: `Bearer ${accessToken}`,
-                //    },
-                //});
+                const metadataResponse = await fetch(userDetailsByIdUrl, {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                });
 
                 fetch(userDetailsByIdUrl, {
                     headers: {
@@ -34,9 +34,9 @@ const Profile = () => {
                     .then(response => response.json())
                     .then(data => this.setState({ items: data }));
 
-                //const { user_metadata } = await metadataResponse.json();
+                const { user_metadata } = await metadataResponse.json();
 
-                //setUserMetadata(user_metadata);
+                setUserMetadata(user_metadata);
             } catch (e) {
                 console.log(e.message);
             }
@@ -50,7 +50,6 @@ const Profile = () => {
                 <img src={user.picture} alt={user.name} />
                 <h2>{user.name}</h2>
                 <p>{user.email}</p>
-                <p>{user.json}</p>
 
                 
             </div>

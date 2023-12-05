@@ -86,14 +86,13 @@ namespace GeoCooker.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<Recipe>> PostRecipe(string name)
+        public async Task<ActionResult<Recipe>> PostRecipe(Recipe recipe)
         {
           if (_context.Recipes == null)
           {
               return Problem("Entity set 'ApplicationDbContext.Recipes'  is null.");
           }
-            Recipe recipe = new Recipe();
-            recipe.RecipeName = name;
+ 
             _context.Recipes.Add(recipe);
             await _context.SaveChangesAsync();
 

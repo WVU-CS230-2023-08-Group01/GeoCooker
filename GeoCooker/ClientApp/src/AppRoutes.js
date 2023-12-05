@@ -1,7 +1,6 @@
 import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
-import { AddRecipe } from "./components/AddRecipe"
 import { AuthenticationGuard } from "./components/Authentication/authentication-guard";
 import  Profile  from "./components/Authentication/Profile"
 const AppRoutes = [

@@ -8,7 +8,9 @@ export const getRecipeResource = async () => {
         method: "GET",
         headers: {
             "content-type": "application/json",
+            "Access-Control-Allow-Origin": "*",
         },
+
     };
 
     const { data, error } = await callExternalApi({ config });
@@ -19,14 +21,16 @@ export const getRecipeResource = async () => {
     };
 };
 
-export const postProtectedResource = async (accessToken) => {
+export const postRecipeResource = async (accessToken, json) => {
     const config = {
         url: `${apiServerUrl}/api/Recipe`,
         method: "POST",
         headers: {
             "content-type": "application/json",
             Authorization: `Bearer ${accessToken}`,
+            "Access-Control-Allow-Origin": "*",
         },
+        data: json,
     };
 
     const { data, error } = await callExternalApi({ config });

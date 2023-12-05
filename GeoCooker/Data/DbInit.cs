@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using GeoCooker.Models;
 
@@ -26,11 +27,11 @@ namespace GeoCooker.Data
                 {
                     Lat = random.NextDouble() * 180 - 90,
                     Lon = random.NextDouble() * 360 - 180,
+                    user = "test@gmail.com",
                     RecipeName = "Recipe " + (i + 1),
                     Description = "Description for Recipe " + (i + 1),
                     Location = "Location " + (i + 1),
-                    Rating = Math.Round(random.NextDouble() * 5, 1) // Generates a random rating between 0 and 5
-
+                    Rating = Math.Round(random.NextDouble() * 5, 1), // Generates a random rating between 0 and 5
                 };
 
                 entries.Add(entry);

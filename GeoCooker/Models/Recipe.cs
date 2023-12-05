@@ -4,6 +4,7 @@ namespace GeoCooker.Models
 	public class Recipe
 	{
 		public int ID { get; set; }
+		public string user { get; set; }
 		public double Lat { get; set; }
 		public double Lon { get; set; }
 		public string Location { get; set; }
