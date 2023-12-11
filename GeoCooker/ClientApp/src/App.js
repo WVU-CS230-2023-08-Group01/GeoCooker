@@ -9,6 +9,7 @@ import Profile from "./components/Authentication/Profile"
 import './custom.css';
 import Recipe from './components/Recipe';
 import PostData from './components/PostData';
+import AddRecipe from './components/AddRecipe';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -25,17 +26,17 @@ export default class App extends Component {
                 path="/"
                 element= <Home/>
             />
-            <Route
-                path="/Recipe"
-                element=<Recipe />
-            />
+            {/*<Route*/}
+            {/*    path="/Recipe"*/}
+            {/*    element=<Recipe />*/}
+            {/*/>*/}
             <Route
                 path="/Profile"
                 element={<AuthenticationGuard component={Profile} />}
             />
             <Route
                 path="/AddRecipe"
-                element={<AuthenticationGuard component={AddRecipeForm} />}
+                element={<AuthenticationGuard component={AddRecipe} />}
                 />
             <Route
                 path="/conf"

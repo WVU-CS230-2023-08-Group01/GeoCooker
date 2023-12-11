@@ -41,13 +41,31 @@ export const postRecipeResource = async (accessToken, json) => {
     };
 };
 
-export const getAdminResource = async () => {
+export const deleteRecipe = async (accessToken, id) => {
     const config = {
-        url: `${apiServerUrl}/api/messages/admin`,
-        method: "GET",
+        url: `${apiServerUrl}/api/Recipe/${id}`,
+        method: "DELETE",
         headers: {
             "content-type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+            "Access-Control-Allow-Origin": "*",
         },
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+};
+
+export const getTownData = async (latitude, longitude) => {
+    let API_KEY = "AIzaSyDfWvBqyov4n20fceBDlWg4lDN74-oInqc";
+    const config = {
+        url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${API_KEY}`,
+        method: "GET",
+        headers: null,
     };
 
     const { data, error } = await callExternalApi({ config });
