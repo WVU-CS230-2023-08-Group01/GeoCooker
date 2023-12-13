@@ -1,168 +1,228 @@
-﻿// AddRecipeForm.js
-
-import React, { Component } from 'react';
-import { PostData } from './PostData';
-import { NavLink } from 'react-router-dom';
-
-var coords = [];
-
-var options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0,
-};
-function success(pos) {
-    var crd = pos.coords;
-
-    console.log("Your current position is:");
-    console.log(`Latitude : ${crd.latitude}`);
-    console.log(`Longitude: ${crd.longitude}`);
-    console.log(`More or less ${crd.accuracy} meters.`);
-
-    coords[0] = crd.latitude;
-    coords[1] = crd.longitude;
-}
-
-function errors(err) {
-    console.warn(`ERROR(${err.code}): ${err.message}`);
-}
+﻿import React, { useState, useEffect } from 'react';
+import { useAuth0 } from "@auth0/auth0-react";
+import { postRecipeResource, getTownData } from '../Services/message.service';
 
 
-class AddRecipeForm extends Component {
-    constructor(props) {
-        super(props);
+const RecipeForm = (Props) => {
+    const [recipeData, setRecipeData] = useState({
+        recipeName: '',
+        description: '',
+        instructions: [''],
+        ingredients: ['']
+    });
+    const [message, setMessage] = useState("");
+    const [manualTrigger, setManualTrigger] = useState(false);
+    const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
-        this.state = {
-            userName: '',
-            recipeName: '',
-            origin: '',
-            ingredients: [''], // Start with one empty ingredient
-        };
-    }
+    useEffect(() => {
+        if (manualTrigger) {
 
-    handleSubmit = (event) => {
-        event.preventDefault();
-        console.log('Form submitted:', this.state);
-        // Add logic to handle form submission, e.g., send data to a server
-    };
+            let isMounted = true;
 
-    handleInputChange = (event, index) => {
-        const { value } = event.target;
-        const ingredients = [...this.state.ingredients];
-        ingredients[index] = value;
-        this.setState({
-            ingredients,
-        });
-    };
+            const getTown = async (town) => {
+                const { data, error } = await getTownData(Props.latitude, Props.longitude);
+                return data;
+            }
 
-    handleAddIngredient = () => {
-        this.setState((prevState) => ({
-            ingredients: [...prevState.ingredients, ''], // Add an empty ingredient to the list
-        }));
-    };
+            function offsetCoordinates(latitude, longitude) {
+                // Offset distance in degrees (approximately 0.007 degrees is around half a mile)
+                const offset = 0.007;
 
-    handleDeleteIngredient = (index) => {
-        this.setState((prevState) => ({
-            ingredients: prevState.ingredients.filter((_, i) => i !== index),
-        }));
-    };
+                // Generate random values for latitude and longitude offsets within the offset range
+                const latOffset = Math.random() * offset - offset / 2;
+                const longOffset = Math.random() * offset - offset / 2;
 
-    componentDidMount() {
-        if (navigator.geolocation) {
-            navigator.permissions
-                .query({ name: "geolocation" })
-                .then(function (result) {
-                    if (result.state === "granted") {
-                        console.log(result.state);
-                        //If granted then you can directly call your function here
-                        navigator.geolocation.getCurrentPosition(success);
-                    } else if (result.state === "prompt") {
-                        navigator.geolocation.getCurrentPosition(success, errors, options);
-                    } else if (result.state === "denied") {
-                        //If denied then you have to show instructions to enable location
+                // Apply offsets to the coordinates
+                const newLatitude = latitude + latOffset;
+                const newLongitude = longitude + longOffset;
+
+                return { newLatitude, newLongitude };
+            }
+
+            const postData = async (town) => {
+                const accessToken = await getAccessTokenSilently();
+
+                //const jsonInstruction = recipeData.instructions.map((item, index) => {
+                //    return {
+                //        i: item
+                //    };
+                //});
+
+                //const jsonIngredient = recipeData.ingredients.map((item, index) => {
+                //    return {
+                //        i: item
+                //    };
+                //});
+                const { newLatitude, newLongitude } = offsetCoordinates(Props.latitude, Props.longitude);
+
+                let json = {
+                    "lat": newLatitude,
+                    "lon": newLongitude,
+                    "user": user.email,
+                    "location": town,
+                    "recipeName": recipeData.recipeName,
+                    "description": recipeData.description,
+                    "rating": 5,
+                    "instructions": [
+                        {
+                            description:"s",
+                        },
+                        {
+                            description:"s2"
+                        }
+                    ],
+                    "ingredients": [],
+                };
+                //recipeData.instructions.forEach((instruction, index) => {
+                //    json.instructions.push({ i: instruction });
+                //});
+                recipeData.ingredients.forEach((ingredient, index) => {
+                    json.ingredients.push({ description: ingredient });
+                });   
+                console.log(json);
+                if (isAuthenticated) {
+                    const { data, error } = await postRecipeResource(accessToken, JSON.stringify(json));
+                    if (!isMounted) {
+                        return;
                     }
-                    result.onchange = function () {
-                        console.log(result.state);
-                    };
+
+                    if (data) {
+                        setMessage(JSON.stringify(data, null, 2));
+                    }
+
+                    if (error) {
+                        setMessage(JSON.stringify(error, null, 2));
+                    }
+                }
+
+            };
+
+            let data = getTown();
+            const jsonD = () => {
+                data.then((a) => {
+                    console.log(a)
+                    //this.setState({ town: a })
+                    if (a.results.length > 0) {
+                        const town = a.results[0].address_components.find(
+                            (component) => component.types.includes('locality')
+                        );
+                        const state = a.results[0].address_components.find(
+                            (component) => component.types.includes('administrative_area_level_1')
+                        );
+                        const townName = town ? town.long_name : 'Town not found';
+                        const stateName = state ? state.short_name : 'State not found';
+                        let id = townName + ", " + stateName;
+                        postData(id);
+                    }
                 });
-        } else {
-            alert("Sorry Not available!");
+            };
+            jsonD();
+
+
+            return () => {
+                isMounted = false;
+                //setManualTrigger(false);
+            };
         }
-    }
+    }, [getAccessTokenSilently, manualTrigger, Props, isAuthenticated, recipeData, user]);
 
-    render() {
-        return (
-            <div>
-                <h2>Add Recipe</h2>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        User Name:
-                        <input
-                            type="text"
-                            value={this.state.userName}
-                            onChange={(e) => this.handleInputChange(e)}
-                        />
-                    </label>
-                    <br />
-                    <label>
-                        Recipe Name:
-                        <input
-                            type="text"
-                            value={this.state.recipeName}
-                            onChange={(e) => this.handleInputChange(e)}
-                        />
-                    </label>
-                    <br />
-                    <label>
-                        Origin:
-                        <input
-                            type="text"
-                            value={this.state.origin}
-                            onChange={(e) => this.handleInputChange(e)}
-                        />
-                    </label>
-                    <br />
-                    <label>
-                        Ingredients:
-                        <ul className="ingredient-list">
-                            {this.state.ingredients.map((ingredient, index) => (
-                                <li key={index}>
-                                    <input
-                                        type="text"
-                                        value={ingredient}
-                                        onChange={(e) => this.handleInputChange(e, index)}
-                                    />
-                                    {index > 0 && ( // Render delete button (X) from the second row onward
-                                        <button
-                                            type="button"
-                                            onClick={() => this.handleDeleteIngredient(index)}
-                                            className="delete-ingredient-button"
-                                        >
-                                            X
-                                        </button>
-                                    )}
-                                </li>
-                            ))}
-                        </ul>
-                        <button type="button" onClick={this.handleAddIngredient} className="add-ingredient-button">
-                            Add Ingredient
-                        </button>
-                    </label>
-                    <br />
-                    <NavLink to="/conf" state={{
-                        recipeName: this.state.recipeName,
-                        lat: coords[0],
-                        lon: coords[1],
-                        ingredients: this.state.ingredients,
-                        instructions: null,
-                        location: this.state.origin,
-                    }}>
-                        <button type="submit">Submit</button>
-                    </NavLink>
-                </form>
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setRecipeData({ ...recipeData, [name]: value });
+    };
+
+    const handleInstructionChange = (index, value) => {
+        const newInstructions = [...recipeData.instructions];
+        newInstructions[index] = value;
+        setRecipeData({ ...recipeData, instructions: newInstructions });
+    };
+
+    const handleIngredientChange = (index, value) => {
+        const newIngredients = [...recipeData.ingredients];
+        newIngredients[index] = value;
+        setRecipeData({ ...recipeData, ingredients: newIngredients });
+    };
+
+    const addField = (fieldType) => {
+        if (fieldType === 'instruction') {
+            setRecipeData({ ...recipeData, instructions: [...recipeData.instructions, ''] });
+        } else if (fieldType === 'ingredient') {
+            setRecipeData({ ...recipeData, ingredients: [...recipeData.ingredients, ''] });
+        }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault(); // Prevents the default form submission behavior (page refresh)
+        setManualTrigger(true);
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <div className="container">
+                <div className="mb-3">
+                    <label className="form-label">Recipe Name:</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="recipeName"
+                        value={recipeData.recipeName}
+                        onChange={handleInputChange}
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Description:</label>
+                    <textarea
+                        className="form-control"
+                        name="description"
+                        value={recipeData.description}
+                        onChange={handleInputChange}
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Instructions:</label>
+                    {recipeData.instructions.map((instruction, index) => (
+                        <div key={`instruction-${index}`} className="mb-3">
+                            <input
+                                type="text"
+                                className="form-control"
+                                value={instruction}
+                                onChange={(e) => handleInstructionChange(index, e.target.value)}
+                            />
+                        </div>
+                    ))}
+                    <button
+                        type="button"
+                        className="btn btn-secondary"
+                        onClick={() => addField('instruction')}
+                    >
+                        Add Instruction
+                    </button>
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Ingredients:</label>
+                    {recipeData.ingredients.map((ingredient, index) => (
+                        <div key={`ingredient-${index}`} className="mb-3">
+                            <input
+                                type="text"
+                                className="form-control"
+                                value={ingredient}
+                                onChange={(e) => handleIngredientChange(index, e.target.value)}
+                            />
+                        </div>
+                    ))}
+                    <button
+                        type="button"
+                        className="btn btn-secondary"
+                        onClick={() => addField('ingredient')}
+                    >
+                        Add Ingredient
+                    </button>
+                </div>
+                <button type="submit" className="btn btn-primary">Submit</button>
             </div>
-        );
-    }
-}
+        </form>
+    );
+};
 
-export default AddRecipeForm;
+export default RecipeForm;

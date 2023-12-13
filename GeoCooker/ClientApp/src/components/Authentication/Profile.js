@@ -1,5 +1,6 @@
 ﻿import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import SavedRecipes from "../SavedRecipes";
 
 const Profile = () => {
     const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
@@ -46,12 +47,12 @@ const Profile = () => {
     }, [getAccessTokenSilently, user?.sub]);
     return (
         isAuthenticated && (
-            <div>
-                <img src={user.picture} alt={user.name} />
-                <h2>{user.name}</h2>
+            <div className="profile-header text-center">
+                <img src={user.picture} alt="User Avatar" className="rounded-circle img-fluid" />
+                <h1>{user.name}</h1>
                 <p>{user.email}</p>
+                < SavedRecipes />
 
-                
             </div>
         )
     );

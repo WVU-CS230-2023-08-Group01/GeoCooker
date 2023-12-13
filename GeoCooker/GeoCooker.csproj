@@ -39,16 +39,16 @@
     <None Remove="Models\" />
     <None Remove="Authentication\" />
     <None Remove="ClientApp\src\components\Authentication\" />
-    <None Remove="ClientApp\src\components\Map\" />
     <None Remove="ClientApp\src\Services\" />
+    <None Remove="ClientApp\src\components\Map\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Models\" />
     <Folder Include="Authentication\" />
     <Folder Include="ClientApp\src\components\Authentication\" />
-    <Folder Include="ClientApp\src\components\Map\" />
     <Folder Include="ClientApp\src\Services\" />
+    <Folder Include="ClientApp\src\components\Map\" />
   </ItemGroup>
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <Exec Command="node --version" ContinueOnError="true">

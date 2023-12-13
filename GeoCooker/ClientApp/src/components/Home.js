@@ -4,6 +4,7 @@ import GoogleMapReact from 'google-map-react';
 import { Link } from 'react-router-dom';
 import myPlaces from './Map/myPlaces';
 import './Home.css';
+import { getRecipeResource } from "../Services/message.service";
 
 
 /*
@@ -12,11 +13,17 @@ google-map-react: https://www.npmjs.com/package/google-map-react?activeTab=readm
 example: http://google-map-react.github.io/google-map-react/map/main/
 example source code: https://github.com/google-map-react/old-examples/blob/master/web/flux/components/examples/x_main/main_map_block.jsx
 */
+async function logRecipes() {
+    const { data, error } = await getRecipeResource();
+    //console.log(data, error)
+    return data;
+}
+
 
 const getInfoWindowString = (place) => `
     <div>
       <div style="font-size: 16px;">
-        ${place.name}
+        ${place.recipeName}
       </div>
       <div style="font-size: 14px;">
         <span style="color: grey;">
@@ -25,25 +32,25 @@ const getInfoWindowString = (place) => `
         <span style="color: orange;">${String.fromCharCode(9733).repeat(Math.floor(place.rating))}</span><span style="color: lightgrey;">${String.fromCharCode(9733).repeat(5 - Math.floor(place.rating))}</span>
       </div>
       <div style="font-size: 14px; color: grey;">
-        ${place.types[0]}
+        ${place.location}
       </div>
       <div style="font-size: 14px; color: grey;">
-        ${'$'.repeat(place.price_level)}
+        ${'$'.repeat(place.description)}
       </div>
-      <div style="font-size: 14px; color: green;">
-        ${place.opening_hours.open_now ? 'Open' : 'Closed'}
-      </div>
+      
     </div>`;
 
 const handleApiLoaded = (map, maps, places) => {
     const markers = [];
     const infowindows = [];
 
+
     places.forEach((place) => {
+        console.log(place.lat + ", " + place.lon)
         markers.push(new maps.Marker({
             position: {
-                lat: place.geometry.location.lat,
-                lng: place.geometry.location.lng,
+                lat: place.lat,
+                lng: place.lon,
             },
             map,
         }));
@@ -86,19 +93,22 @@ export class Home extends Component {
         };
     }
 
+    
+
     componentDidMount() {
-        fetch('./Map/myPlaces.json')
-            .then((response) => response.json())
-            .then((data) => {
-                data.results.forEach((result) => {
-                    result.show = false; // eslint-disable-line no-param-reassign
-                });
-                this.setState({ places: data.results });
+        let data = logRecipes();
+        const jsonD = () => {
+            data.then((a) => {
+                console.log(a)
+                this.setState({places: a})
             });
+        };
+        jsonD();
     }
 
     render() {
         const { places } = this.state;
+
 
         return (
             <>
@@ -121,14 +131,6 @@ export class Home extends Component {
                                     title={dataItem.title}
                                 />
                             ))}
-
-                            <MyMapMarker
-                                key={"random"}
-                                id={"random"}
-                                lat={24.805559}
-                                lng={-40.919560}
-                                title={"Click for random recipe!"}
-                            />
 
                         </GoogleMapReact>
                     </div>

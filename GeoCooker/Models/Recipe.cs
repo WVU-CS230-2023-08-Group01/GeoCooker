@@ -11,8 +11,8 @@ namespace GeoCooker.Models
 		public string RecipeName { get; set; }
 		public string Description { get; set; }
 		public double Rating { get; set; }
-        public ICollection<Instruction> Instructions { get; set; }
-        public ICollection<Ingredient> Ingredients { get; set; }
+		public ICollection<Instruction> Instructions { get; } = new List<Instruction>();
+		public ICollection<Ingredient> Ingredients { get; } = new List<Ingredient>();
 
     }
 }
