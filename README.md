@@ -1,3 +1,7 @@
+# Important Info
+
+Keeping this branch for the commit history - might try to refactor it later for personal use.
+
 # General Info
 
 Language: ASP.Net Core API 5 with react front end\
