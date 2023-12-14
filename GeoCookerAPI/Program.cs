@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,13 +40,21 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.WriteIndented = true;
+});
+
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(MyAllowSpecificOrigins,
                           policy =>
                           {
                               policy.WithOrigins("https://localhost:44478",
-                                                  "http://localhost:44478")
+                                                  "http://localhost:44478",
+                                                  "https://c1a0-2601-541-101-7e20-e433-425b-97bc-e706.ngrok-free.app")
                                                   .AllowAnyHeader()
                                                   .AllowAnyMethod();
                           });

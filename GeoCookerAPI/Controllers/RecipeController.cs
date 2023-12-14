@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using GeoCookerAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace GeoCookerAPI.Controllers
+namespace GeoCookerAPI
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -29,7 +29,9 @@ namespace GeoCookerAPI.Controllers
           {
               return NotFound();
           }
-            return await _context.Recipes.ToListAsync();
+
+
+            return await _context.Recipes.Include(i => i.Ingredients).Include(i => i.Instructions).Include(i => i.Tags).ToListAsync();
         }
 
         // GET: api/Recipe/5
@@ -40,7 +42,10 @@ namespace GeoCookerAPI.Controllers
           {
               return NotFound();
           }
-            var recipe = await _context.Recipes.FindAsync(id);
+            //var recipe = await _context.Recipes.FindAsync(id);
+
+            var recipe = await _context.Recipes.Include(i => i.Instructions).Include(i => i.Ingredients).Include(i => i.Tags)
+                .FirstOrDefaultAsync(i => i.RecipeId == id);
 
             if (recipe == null)
             {
@@ -56,7 +61,7 @@ namespace GeoCookerAPI.Controllers
         [Authorize]
         public async Task<IActionResult> PutRecipe(int id, Recipe recipe)
         {
-            if (id != recipe.ID)
+            if (id != recipe.RecipeId)
             {
                 return BadRequest();
             }
@@ -92,11 +97,10 @@ namespace GeoCookerAPI.Controllers
           {
               return Problem("Entity set 'ApplicationDbContext.Recipes'  is null.");
           }
- 
             _context.Recipes.Add(recipe);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetRecipe", new { id = recipe.ID }, recipe);
+            return CreatedAtAction("GetRecipe", new { id = recipe.RecipeId }, recipe);
         }
 
         // DELETE: api/Recipe/5
@@ -122,7 +126,7 @@ namespace GeoCookerAPI.Controllers
 
         private bool RecipeExists(int id)
         {
-            return (_context.Recipes?.Any(e => e.ID == id)).GetValueOrDefault();
+            return (_context.Recipes?.Any(e => e.RecipeId == id)).GetValueOrDefault();
         }
     }
 }

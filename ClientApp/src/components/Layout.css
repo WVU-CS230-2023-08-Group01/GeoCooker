@@ -1,0 +1,31 @@
+/* Reset default margin and padding on the html and body elements */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: auto; /* Prevent scrolling */
+}
+
+/* Style the content container and its parent div to fill the screen */
+#root {
+    height: 100%;
+}
+
+#nav-menu {
+    padding: 0;
+    margin: 0;
+}
+
+/* Make the Container full width with a maximum width */
+#container {
+    padding: 0;
+    width: 100%;
+    max-width: 100%; /* Ensure it doesn't exceed the viewport width */
+    /* Additional styles for the container */
+}
+
+#footer {
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+}

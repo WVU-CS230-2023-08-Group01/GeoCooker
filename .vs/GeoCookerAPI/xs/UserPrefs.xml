@@ -1,30 +1,33 @@
 ﻿<Properties StartupConfiguration="{6B92C8EB-A119-4AE6-BBCF-FB4353653A76}|https">
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.GeoCookerAPI PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="GeoCookerAPI/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="cloudbuild.yaml">
     <Files>
-      <File FileName="GeoCookerAPI/Program.cs" Line="64" Column="4" />
-      <File FileName="GeoCookerAPI/Controllers/RecipeController.cs" />
-      <File FileName="GeoCookerAPI/Data/ApplicationDbContext.cs" />
-      <File FileName="GeoCookerAPI/Data/DbInit.cs" />
-      <File FileName="GeoCookerAPI/Data/GenerateCoords.cs" />
-      <File FileName="GeoCookerAPI/Models/Ingredient.cs" />
-      <File FileName="GeoCookerAPI/Models/Instruction.cs" />
-      <File FileName="GeoCookerAPI/Models/Recipe.cs" />
-      <File FileName="GeoCookerAPI/appsettings.json" />
-      <File FileName="GeoCookerAPI/appsettings.Development.json" />
+      <File FileName="GeoCookerAPI/Program.cs" Line="45" Column="35" />
+      <File FileName="GeoCookerAPI/Controllers/RecipeController.cs" Line="1" Column="1" />
+      <File FileName="GeoCookerAPI/Data/ApplicationDbContext.cs" Line="19" Column="27" />
+      <File FileName="GeoCookerAPI/Data/DbInit.cs" Line="32" Column="47" />
+      <File FileName="GeoCookerAPI/Data/GenerateCoords.cs" Line="1" Column="1" />
+      <File FileName="GeoCookerAPI/Models/Ingredient.cs" Line="1" Column="1" />
+      <File FileName="GeoCookerAPI/Models/Instruction.cs" Line="1" Column="1" />
+      <File FileName="GeoCookerAPI/Models/Recipe.cs" Line="1" Column="1" />
+      <File FileName="GeoCookerAPI/appsettings.json" Line="1" Column="1" />
+      <File FileName="GeoCookerAPI/appsettings.Development.json" Line="1" Column="1" />
+      <File FileName="GeoCookerAPI/Dockerfile" Line="18" Column="9" />
+      <File FileName="docker-compose.override.yml" Line="7" Column="22" />
+      <File FileName="docker-compose.yml" Line="29" Column="34" />
+      <File FileName="GeoCookerAPI/Properties/launchSettings.json" Line="1" Column="1" />
+      <File FileName="../../.microsoft/usersecrets/4c17b5ff-74ea-4417-9516-92e490030990/secrets.json" Line="1" Column="1" />
+      <File FileName="cloudbuild.yaml" Line="4" Column="23" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="GeoCookerAPI" expanded="True">
-            <Node name="GeoCookerAPI" expanded="True">
-              <Node name="appsettings.json" expanded="True" />
-              <Node name="Program.cs" selected="True" />
-            </Node>
-          </Node>
+          <Node name="GeoCookerAPI" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>
