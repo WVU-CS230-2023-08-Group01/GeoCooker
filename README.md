@@ -1,6 +1,6 @@
 # GeoCooker
 
-![alt text]([https://scidata.nyc3.cdn.digitaloceanspaces.com/GeoCooker/GKfullBLACK.png])
+![alt text](https://scidata.nyc3.cdn.digitaloceanspaces.com/GeoCooker/GKfullBLACK.png)
 
 
 
