@@ -4,6 +4,8 @@
 
 GeoCooker is a website that makes finding new food easy. The idea is that if you want Indian food the user can easily scroll to the country of India and find recipes from local people. The authenticity is top notch, real recipes from real people in a certain geographical area. This app not only is fun when the user wants to mix up their cuisine but also shows how food differs region to region. GeoCooker focuses on making the addidtion of recipes extreamly easy, first log in, go to AddRecipes, fill out the form, and hit submit! GeoCooker will automatically get your current location (If Location Permissions are Enabled) and then publish the recipe within half a mile of your current location. Privacy is key so GeoCooker automatically randomly moves your location so no angry visits will happen! 
 
+
+# Tech Specs
 Language: ASP.Net Core API 5 with react front end\
 C#, JS, HTML, CSS\
 NPM: Node/React Package Manager\
